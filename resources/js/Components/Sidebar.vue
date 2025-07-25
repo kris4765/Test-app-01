@@ -38,9 +38,10 @@ import { Link } from '@inertiajs/vue3'
 const isVisible = ref(true)
 
 const menu = [
-  { id: 1, label: 'Dashboard', icon: 'bi bi-speedometer2', route: '/dashboard' },
-  { id: 2, label: 'Users', icon: 'bi bi-people', route: '/users' },
-  { id: 3, label: 'Settings', icon: 'bi bi-gear', route: '/settings' },
+  { label: 'home', icon: 'bi bi-grid-1x2', route: '/' },
+  { label: 'Dashboard', icon: 'bi bi-speedometer2', route: '/dashboard' },
+  { label: 'Users', icon: 'bi bi-people', route: '/users' },
+  { label: 'Settings', icon: 'bi bi-gear', route: '/settings' },
 ]
 
 </script>
