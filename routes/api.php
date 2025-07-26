@@ -19,7 +19,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 use App\Http\Controllers\TodoController;
+use App\Http\Controllers\DBproftestController;
 
 Route::apiResource('todos', TodoController::class);
 
 Route::patch('/todos/{id}/toggle-status', [TodoController::class, 'toggleStatus']);
+
+
+Route::get('/dbproftest', [DBproftestController::class, 'index']);
+Route::post('/dbproftest/generate', [DBprofTestController::class, 'generate']);

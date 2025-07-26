@@ -24,6 +24,9 @@ Route::get('/', function () {
 Route::get('/dashboard', fn () => Inertia::render('Dashboard'));
 Route::get('/users', fn () => Inertia::render('Users'));
 Route::get('/settings', fn () => Inertia::render('Settings'));
+Route::get('/db_test', fn () => Inertia::render('DBproftest'));
+
+
 
 
 
