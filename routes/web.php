@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,14 +18,33 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Home'); // This renders resources/js/Pages/Home.vue
+    return Inertia::render('Login'); // This renders resources/js/Pages/Home.vue
 });
 
 
-Route::get('/dashboard', fn () => Inertia::render('Dashboard'));
-Route::get('/users', fn () => Inertia::render('Users'));
-Route::get('/settings', fn () => Inertia::render('Settings'));
-Route::get('/db_test', fn () => Inertia::render('DBproftest'));
+Route::middleware('guest')->group(function () {
+    Route::get('/login', fn() => Inertia::render('Login'))->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+});
+
+
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
+
+
+// Route::get('/dashboard', fn () => Inertia::render('Dashboard'));
+// Route::get('/users', fn () => Inertia::render('Users'));
+// Route::get('/settings', fn () => Inertia::render('Settings'));
+// Route::get('/db_test', fn () => Inertia::render('DBproftest'));
+
+
+
+Route::middleware('auth')->group(function () {
+    Route::get('/home', fn() => Inertia::render('Home'))->name('home');
+    Route::get('/dashboard', fn() => Inertia::render('Dashboard'))->name('dashboard');
+    Route::get('/users', fn() => Inertia::render('Users'));
+    Route::get('/settings', fn() => Inertia::render('Settings'));
+    Route::get('/db_test', fn() => Inertia::render('DBproftest'));
+});
 
 
 
@@ -40,4 +60,4 @@ Route::get('/db_test', fn () => Inertia::render('DBproftest'));
 //     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 // });
 
-require __DIR__.'/auth.php';
+// require __DIR__.'/auth.php';

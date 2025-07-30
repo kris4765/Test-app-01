@@ -2,6 +2,11 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TodoController;
+use App\Http\Controllers\DBproftestController;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,17 +19,29 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/login', [AuthController::class, 'login']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/me', [AuthController::class, 'me']);
+    Route::post('/logout', [AuthController::class, 'logout']);
+    // Add more protected routes here
 });
 
-use App\Http\Controllers\TodoController;
-use App\Http\Controllers\DBproftestController;
+
 
 Route::apiResource('todos', TodoController::class);
-
 Route::patch('/todos/{id}/toggle-status', [TodoController::class, 'toggleStatus']);
 
 
 Route::get('/dbproftest', [DBproftestController::class, 'index']);
 Route::post('/dbproftest/generate', [DBprofTestController::class, 'generate']);
+
+
+Route::apiResource('users', UserController::class);
+
+
+
+//notification apis
+
+Route::get('/notifications', [NotificationController::class, 'index']);
+Route::post('/notifications', [NotificationController::class, 'store']);
+Route::post('/notifications/{id}/read', [NotificationController::class, 'markAsRead']);

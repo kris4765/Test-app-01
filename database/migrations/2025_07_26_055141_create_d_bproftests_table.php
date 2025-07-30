@@ -21,7 +21,6 @@ return new class extends Migration {
 
             // Relationships (simulate load with FK)
             $table->unsignedBigInteger('user_id')->nullable();
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
 
             // Timestamps
             $table->timestamp('starts_at')->nullable();

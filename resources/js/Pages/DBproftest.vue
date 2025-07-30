@@ -1,6 +1,5 @@
 <template>
   <div class="d-flex">
-    <Sidebar />
 
     <div class="container p-4">
       <h2>DB Performance Test</h2>
@@ -111,4 +110,9 @@ const changePage = (page) => {
 onMounted(() => {
 //   store.fetchPage(1)
 })
+
+
+defineOptions({
+  layout: Sidebar
+})  
 </script>

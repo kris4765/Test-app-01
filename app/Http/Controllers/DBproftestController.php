@@ -38,7 +38,7 @@ class DBprofTestController extends Controller
         for ($i = 0; $i < $count; $i++) {
             $data[] = [
                 'title' => 'Record #' . $i,
-                'slug' => Str::slug('Record ' . $i) . '-' . Str::random(6),
+                'slug' => Str::slug('Record ' . $i) . '-' . Str::random(length: 6),
                 'description' => 'This is a description for record #' . $i,
                 'type' => ['simple', 'advanced', 'premium'][rand(0, 2)],
                 'status' => (bool)rand(0, 1),

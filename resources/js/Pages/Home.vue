@@ -1,9 +1,8 @@
 <template>
   <!-- Flex wrapper for sidebar + main -->
-  <div class="d-flex" style="min-height: 100vh;">
+  <div class="d-flex">
 
     <!-- Sidebar on the left -->
-    <Sidebar />
 
     <!-- Main content on the right -->
     <div class="flex-grow-1 p-4">
@@ -59,6 +58,11 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import Sidebar from '@/Components/Sidebar.vue'
+
+
+defineOptions({
+  layout: Sidebar
+})
 
 const todos = ref([])
 const newTodo = ref('')
