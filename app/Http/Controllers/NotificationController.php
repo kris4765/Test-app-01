@@ -96,7 +96,7 @@ class NotificationController extends Controller
             Notification::create([
                 'send_from' => $sender->email,
                 'send_to' => $admin->email,
-                'data' => "{$sender->email} has a new todo action.",
+                'data' => "{$sender->email} has a new todo action ss.",
                 'is_read' => false,
             ]);
         }
