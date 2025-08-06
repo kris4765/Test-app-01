@@ -26,16 +26,37 @@
 
 <script setup>
 import { reactive } from 'vue'
-import { useForm } from '@inertiajs/vue3'
+import { useForm, usePage } from '@inertiajs/vue3'
+import axios from 'axios'
 
 const form = useForm({
   email: '',
   password: '',
 })
 
+// Listen for user after login
 const submit = async () => {
-  await axios.get('/sanctum/csrf-cookie')  // Important!
-  form.post('/login')                      // Then login
-}
+  try {
+    await axios.get('/sanctum/csrf-cookie')
 
+    form.post('/login', {
+      onSuccess: async () => {
+        const user = usePage().props.auth.user
+
+        if (user.role === 'employee') {
+          try {
+            await axios.post('/api/notify-admins-login', {
+              email: form.email,
+            });
+            console.log('✅ Admins notified of employee login')
+          } catch (e) {
+            console.warn('⚠️ Failed to notify admins', e)
+          }
+        }
+      }
+    })
+  } catch (e) {
+    console.error('Login failed:', e)
+  }
+}
 </script>

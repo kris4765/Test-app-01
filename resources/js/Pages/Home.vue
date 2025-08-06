@@ -58,6 +58,7 @@
 import { ref, onMounted } from 'vue'
 import axios from 'axios'
 import Sidebar from '@/Components/Sidebar.vue'
+import { usePage } from '@inertiajs/vue3'
 
 
 defineOptions({
@@ -77,7 +78,34 @@ const addTodo = async () => {
   await axios.post('/api/todos', { title: newTodo.value })
   newTodo.value = ''
   fetchTodos()
+  notifyadminsOnTodo()
 }
+
+
+
+//print the curret user's role
+const page = usePage()
+const user = page.props.auth.user
+console.log('Current user role:', user.email)
+
+
+
+const notifyadminsOnTodo = async () => {
+  try {
+    await axios.post('/api/notify-admins-todo', {
+      title: newTodo.value,
+      // since you're not using auth middleware
+      email: user.email
+      
+    })
+    console.log('✅ Admins notified of new todo')
+  } catch (e) {
+    console.warn('⚠️ Failed to notify admins', e)
+  }
+}
+
+
+
 
 const updatestatus = async (id) => {
   await axios.patch(`/api/todos/${id}/toggle-status`)

@@ -17,6 +17,10 @@ class TodoController extends Controller
         return Todo::all();
     }
 
+
+
+    
+
     public function store(Request $request)
     {
         return Todo::create([

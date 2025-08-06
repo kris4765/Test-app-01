@@ -1,0 +1,17 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBMoAB5a3FIUZz_ciFCnBJ6WIotd2jxVtA",
+  authDomain: "todo-fcm-notify.firebaseapp.com",
+  projectId: "todo-fcm-notify",
+  storageBucket: "todo-fcm-notify.firebasestorage.app",
+  messagingSenderId: "679014377974",
+  appId: "1:679014377974:web:cb02723a81f82184823fd7"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
