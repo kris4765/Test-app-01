@@ -18,6 +18,24 @@ import { createPinia } from 'pinia'
 // ✅ App Name (default fallback)
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel'
 
+
+
+
+
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker
+    .register('/firebase-messaging-sw.js')
+    .then((registration) => {
+      console.log('✅ Service Worker registered:', registration);
+    })
+    .catch((err) => {
+      console.error('❌ Service Worker registration failed:', err);
+    });
+}
+
+
+
+
 // ✅ Inertia App Setup
 createInertiaApp({
   title: (title) => `${title} - ${appName}`,

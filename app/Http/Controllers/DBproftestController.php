@@ -16,7 +16,7 @@ class DBprofTestController extends Controller
         $start = microtime(true);
 
         // You can simulate heavy DB load with huge pagination
-        $records = DBprofTest::latest()->paginate(100);
+        $records = DBprofTest::latest()->paginate(20);
         $duration = microtime(true) - $start;
 
         return response()->json([
